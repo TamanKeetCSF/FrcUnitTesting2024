@@ -18,6 +18,7 @@ public class RobotContainer {
 
     // Subsystems
     public final intake m_intake = new intake();
+    public final outake m_outake = new outake();  // New outake subsystem
 
     // Joysticks
     private final XboxController xboxController1 = new XboxController(0);
@@ -44,9 +45,13 @@ public class RobotContainer {
      * Use this method to define your button->command mappings.
      */
     private void configureButtonBindings() {
-        // Create button mappings
+        // Intake button mappings
         final JoystickButton buttonA = new JoystickButton(xboxController1, XboxController.Button.kA.value);
         final JoystickButton buttonB = new JoystickButton(xboxController1, XboxController.Button.kB.value);
+
+        // Outake button mappings
+        final JoystickButton buttonX = new JoystickButton(xboxController1, XboxController.Button.kX.value);
+        final JoystickButton buttonY = new JoystickButton(xboxController1, XboxController.Button.kY.value);
 
         // Button A activates the intake
         buttonA.onTrue(new InstantCommand(() -> m_intake.activateIntake(), m_intake)
@@ -54,6 +59,13 @@ public class RobotContainer {
 
         // Button B stops the intake
         buttonB.onTrue(new InstantCommand(() -> m_intake.stopIntake(), m_intake));
+
+        // Button X activates the outake
+        buttonX.onTrue(new InstantCommand(() -> m_outake.activateOutake(), m_outake)
+                        .withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+
+        // Button Y stops the outake
+        buttonY.onTrue(new InstantCommand(() -> m_outake.stopOutake(), m_outake));
     }
 
     public XboxController getXboxController1() {
@@ -70,4 +82,5 @@ public class RobotContainer {
         return m_chooser.getSelected();
     }
 }
+
 
