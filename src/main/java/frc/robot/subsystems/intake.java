@@ -15,7 +15,6 @@ public class intake extends SubsystemBase {
     private CANSparkMax MotorAbajo = new CANSparkMax(9, MotorType.kBrushed);
     
     
-    
     // Replace with the actual CAN ID for MotorAbajo
 
     public intake() {
