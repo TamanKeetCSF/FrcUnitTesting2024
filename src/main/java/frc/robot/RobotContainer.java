@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
+//import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
 
 /**
  * This class is where the bulk of the robot should be declared.
@@ -54,18 +54,21 @@ public class RobotContainer {
         final JoystickButton buttonY = new JoystickButton(xboxController1, XboxController.Button.kY.value);
 
         // Button A activates the intake
-        buttonA.onTrue(new InstantCommand(() -> m_intake.activateIntake(), m_intake)
-                        .withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        buttonA.onTrue(new InstantCommand(() -> m_intake.activateIntake(), m_intake))
+           .onFalse(new InstantCommand(() -> m_intake.stopIntake(), m_intake));
 
         // Button B stops the intake
-        buttonB.onTrue(new InstantCommand(() -> m_intake.stopIntake(), m_intake));
+        buttonX.onTrue(new InstantCommand(() -> m_intake.activateDesintake(), m_intake))
+           .onFalse(new InstantCommand(() -> m_intake.stopIntake(), m_intake));
 
-        // Button X activates the outake
-        buttonX.onTrue(new InstantCommand(() -> m_outake.activateOutake(), m_outake)
-                        .withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
-        // Button Y stops the outake
-        buttonY.onTrue(new InstantCommand(() -> m_outake.stopOutake(), m_outake));
+        // Button X activates the speeker shooter
+        buttonB.onTrue(new InstantCommand(() -> m_outake.outakeSpeeker(), m_outake))
+           .onFalse(new InstantCommand(() -> m_outake.stopOutake(), m_outake));
+
+        // Button Y stops the amp shooter
+        buttonY.onTrue(new InstantCommand(() -> m_outake.outakeAmp(), m_outake))
+           .onFalse(new InstantCommand(() -> m_outake.stopOutake(), m_outake));
     }
 
     public XboxController getXboxController1() {

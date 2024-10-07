@@ -10,7 +10,7 @@ public class TestMotors extends SubsystemBase {
   /** Creates a new TestMotors. */
   public TestMotors() {
     // Initialize the motor controller with the PWM channel (e.g., 0 for PWM channel 0)
-    testMotor1 = new PWMVictorSPX(0);  // Adjust channel number based on where it’s connected
+    testMotor1 = new PWMVictorSPX(10);  // Adjust channel number based on where it’s connected
   }
 
   /** Activates the motor at full speed forward. */
