@@ -1,9 +1,9 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.revrobotics.CANSparkMax;
+
 import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
@@ -11,14 +11,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class intake extends SubsystemBase {
     // Motor declarations
-    private CANSparkMax MotorArriba = new CANSparkMax(6, MotorType.kBrushed);  // Replace with the actual CAN ID for MotorArriba
-    private CANSparkMax MotorAbajo = new CANSparkMax(9, MotorType.kBrushed);
+    private CANSparkMax intkArriba = new CANSparkMax(6, MotorType.kBrushed);
+    private CANSparkMax intkAbajo = new CANSparkMax(5, MotorType.kBrushed);  // Replace with the actual CAN ID for MotorArriba
+    
     
     
     // Replace with the actual CAN ID for MotorAbajo
 
     public intake() {
-        // Motor initialization if needed
+        //intkArriba.setInverted(true);
+
     }
 
     @Override
@@ -32,15 +34,20 @@ public class intake extends SubsystemBase {
     }
 
     // Methods to control the intake motors
+    // Métodos en el subsistema intake
     public void activateIntake() {
-        System.out.println("waza");
-        MotorArriba.set(0.3);  // Set speed for intake activation
-        MotorAbajo.set(0.3);
-    }
-
+        intkArriba.set(-0.3);
+        intkAbajo.set(0.3);
+        System.out.println("intake activated");
+}
+    public void activateDesintake() {
+        intkArriba.set(0.3); // Activar en reversa
+        intkAbajo.set(-0.3); // Activar en reversa
+        System.out.println("Desintake activated");
+}
     public void stopIntake() {
-        System.out.println("waza");
-        MotorArriba.set(0.0);  // Stop the motors
-        MotorAbajo.set(0.0);
-    }
+        intkArriba.set(0); // Activar en reversa
+        intkAbajo.set(0); // Activar en reversa
+       // System.out.println("intake stoped");
+}
 }
